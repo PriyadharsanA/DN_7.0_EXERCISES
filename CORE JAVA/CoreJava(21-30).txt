@@ -1,0 +1,170 @@
+CORE JAVA (Programs 21–30)
+
+21. Custom Exception
+
+class InvalidAgeException extends Exception{
+    InvalidAgeException(String msg){
+        super(msg);
+    }
+}
+
+public class CustomExceptionDemo{
+    static void checkAge(int age) throws InvalidAgeException{
+        if(age<18){
+            throw new InvalidAgeException("Age must be 18 or above");
+	}
+        System.out.println("Eligible");
+    }
+    public static void main(String[] args){
+        try{
+            checkAge(15);
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+
+22. File Writing
+
+import java.io.*;
+import java.util.*;
+public class FileWrite{
+    public static void main(String[] args)throws Exception{
+        Scanner in=new Scanner(System.in);
+        String text=in.nextLine();
+        FileWriter fw=new FileWriter("output.txt");
+        fw.write(text);
+        fw.close();
+        System.out.println("Data Written Successfully");
+    }
+}
+
+
+23. File Reading
+
+import java.io.*;
+public class FileRead{
+    public static void main(String[] args) throws Exception{
+        BufferedReader br=new BufferedReader(new FileReader("output.txt"));
+        String line;
+        while((line=br.readLine())!=null){
+            System.out.println(line);
+        }
+        br.close();
+    }
+}
+
+
+24. ArrayList Example
+
+import java.util.*;
+public class ArrayListDemo{
+    public static void main(String[] args){
+        ArrayList<String> students=new ArrayList<>();
+        students.add("John");
+        students.add("Alice");
+        students.add("David");
+        for(String s:students){
+            System.out.println(s);
+        }
+    }
+}
+
+
+25. HashMap Example
+
+import java.util.*;
+public class HashMapDemo{
+    public static void main(String[] args){
+        HashMap<Integer,String> map=new HashMap<>();
+        map.put(101,"John");
+        map.put(102,"Alice");
+        map.put(103,"David");
+        System.out.println(map.get(102));
+    }
+}
+
+
+26. Thread Creation
+
+class MyThread extends Thread{
+    public void run(){
+        for(int i=1;i<=5;i++){
+            System.out.println(
+            Thread.currentThread().getName());
+
+        }
+    }
+}
+public class ThreadDemo{
+    public static void main(String[] args){
+        MyThread t1=new MyThread();
+        MyThread t2=new MyThread();
+        t1.start();
+        t2.start();
+    }
+}
+
+
+27. Lambda Expressions
+
+import java.util.*;
+public class LambdaDemo{
+    public static void main(String[] args){
+        List<String> names=Arrays.asList("David","John","Alice");
+        Collections.sort(names,(a,b)->a.compareTo(b));
+        System.out.println(names);
+    }
+}
+
+
+28. Stream API
+
+import java.util.*;
+import java.util.stream.*;
+public class StreamDemo{
+    public static void main(String[] args){
+        List<Integer> nums=Arrays.asList(1,2,3,4,5,6,7,8);
+        List<Integer> even=nums.stream().filter(n->n%2==0).collect(Collectors.toList());
+        System.out.println(even);
+    }
+}
+
+
+29. Records
+
+import java.util.*;
+import java.util.stream.*;
+record Person(String name,int age){}
+public class RecordDemo{
+    public static void main(String[] args){
+        List<Person> people=List.of(
+        	new Person("John",20),
+        	new Person("Alice",17),
+        	new Person("David",25));
+        people.stream()
+              .filter(p->p.age()>18)
+              .forEach(System.out::println);
+    }
+}
+
+
+30. Pattern Matching for Switch (Java 21)
+
+public class PatternSwitch{
+    static void check(Object obj){
+        switch(obj){
+            case Integer i -> System.out.println("Integer: "+i);
+            case String s -> System.out.println("String: "+s);
+            case Double d -> System.out.println("Double: "+d);
+            default -> System.out.println("Unknown Type");
+        }
+    }
+    public static void main(String[] args){
+        check(10);
+        check("Hello");
+        check(10.5);
+    }
+}

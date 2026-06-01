@@ -1,0 +1,193 @@
+CORE JAVA (Programs 11–20)
+
+11. Factorial Calculator
+
+import java.util.Scanner;
+public class Factorial{
+    public static void main(String[] args){
+        Scanner in=new Scanner(System.in);
+        int n=in.nextInt();
+        long fact=1;
+        for(int i=1;i<=n;i++){
+            fact*=i;
+        }
+        System.out.println("Factorial = "+fact);
+    }
+}
+
+
+12. Method Overloading
+
+public class Overloading{
+    static int add(int a,int b){
+        return a+b;
+    }
+    static double add(double a,double b){
+        return a+b;
+    }
+    static int add(int a,int b,int c){
+        return a+b+c;
+    }
+    public static void main(String[] args){
+        System.out.println(add(10,20));
+        System.out.println(add(10.5,20.5));
+        System.out.println(add(10,20,30));
+    }
+}
+
+
+13. Recursive Fibonacci
+
+import java.util.Scanner;
+public class Fibonacci{
+    static int fib(int n){
+        if(n<=1)
+            return n;
+        return fib(n-1)+fib(n-2);
+    }
+    public static void main(String[] args){
+        Scanner in=new Scanner(System.in);
+        int n=in.nextInt();
+        System.out.println(fib(n));
+    }
+}
+
+
+14. Array Sum and Average
+
+import java.util.Scanner;
+public class ArraySumAverage{
+    public static void main(String[] args){
+        Scanner in=new Scanner(System.in);
+        int n=in.nextInt();
+        int arr[]=new int[n];
+        int sum=0;
+        for(int i=0;i<n;i++){
+            arr[i]=in.nextInt();
+            sum+=arr[i];
+        }
+        double avg=(double)sum/n;
+        System.out.println("Sum = "+sum);
+        System.out.println("Average = "+avg);
+    }
+}
+
+
+15. String Reversal
+
+import java.util.Scanner;
+public class StringReverse{
+    public static void main(String[] args){
+        Scanner in=new Scanner(System.in);
+        String str=in.nextLine();
+        StringBuilder sb=new StringBuilder(str);
+        System.out.println(sb.reverse());
+    }
+}
+
+
+16. Palindrome Checker
+
+import java.util.Scanner;
+public class Palindrome{
+    public static void main(String[] args){
+        Scanner in=new Scanner(System.in);
+        String str=in.nextLine();
+        String rev=new StringBuilder(str).reverse().toString();
+        if(str.equals(rev)){
+            System.out.println("Palindrome");
+	}
+        else{
+            System.out.println("Not Palindrome");
+	}
+    }
+}
+
+
+17. Class and Object Creation
+
+class Car{
+    String make;
+    String model;
+    int year;
+    void displayDetails(){
+        System.out.println(make);
+        System.out.println(model);
+        System.out.println(year);
+    }
+}
+public class CarDemo{
+    public static void main(String[] args){
+        Car c1=new Car();
+        c1.make="Toyota";
+        c1.model="Camry";
+        c1.year=2024;
+        c1.displayDetails();
+    }
+}
+
+
+18. Inheritance Example
+
+class Animal{
+    void makeSound(){
+        System.out.println("Animal Sound");
+    }
+}
+class Dog extends Animal{
+    void makeSound(){
+        System.out.println("Bark");
+    }
+}
+public class InheritanceDemo{
+    public static void main(String[] args){
+        Animal a=new Animal();
+        Dog d=new Dog();
+        a.makeSound();
+        d.makeSound();
+    }
+}
+
+
+19. Interface Implementation
+
+interface Playable{
+    void play();
+}
+class Guitar implements Playable{
+    public void play(){
+        System.out.println("Playing Guitar");
+    }
+}
+class Piano implements Playable{
+    public void play(){
+        System.out.println("Playing Piano");
+    }
+}
+public class InterfaceDemo{
+    public static void main(String[] args){
+        Guitar g=new Guitar();
+        Piano p=new Piano();
+        g.play();
+        p.play();
+    }
+}
+
+
+20. Try-Catch Example
+
+import java.util.Scanner;
+public class TryCatchDemo{
+    public static void main(String[] args){
+        Scanner in=new Scanner(System.in);
+        int a=in.nextInt();
+        int b=in.nextInt();
+        try{
+            int result=a/b;
+            System.out.println(result);
+        }
+        catch(ArithmeticException e){
+            System.out.println("Cannot divide by zero");
+        }
+    }
+}

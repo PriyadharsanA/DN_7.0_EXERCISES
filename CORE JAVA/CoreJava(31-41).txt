@@ -1,0 +1,216 @@
+CORE JAVA (Programs 31–41)
+
+31. Basic JDBC Connection
+
+import java.sql.*;
+public class JDBCConnection{
+    public static void main(String[] args){
+        try{
+            Connection con=DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/test",
+            "root",
+            "password");
+
+            Statement st=con.createStatement();
+            ResultSet rs=st.executeQuery("select * from students");
+            while(rs.next()){
+                System.out.println(rs.getInt(1)+" "+rs.getString(2));
+            }
+            con.close();
+        }
+	catch(Exception e){
+            System.out.println(e);
+        }
+    }
+}
+
+
+32. Insert and Update Operations in JDBC
+
+import java.sql.*;
+public class StudentDAO{
+    public static void main(String[] args) throws Exception{
+        Connection con=DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/test",
+        "root",
+        "password");
+
+        PreparedStatement ps=con.prepareStatement("insert into students values(?,?)");
+        ps.setInt(1,101);
+        ps.setString(2,"John");
+        ps.executeUpdate();
+
+        PreparedStatement ps2=con.prepareStatement("update students set name=? where id=?");
+        ps2.setString(1,"David");
+        ps2.setInt(2,101);
+        ps2.executeUpdate();
+        con.close();
+    }
+}
+
+
+33. Transaction Handling in JDBC
+
+import java.sql.*;
+public class TransactionDemo{
+    public static void main(String[] args){
+        try{
+            Connection con=DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/test",
+            "root",
+            "password");
+
+            con.setAutoCommit(false);
+            Statement st=con.createStatement();
+            st.executeUpdate("update accounts set balance=balance-100 where id=1");
+            st.executeUpdate("update accounts set balance=balance+100 where id=2");
+            con.commit();
+            System.out.println("Transaction Successful");
+        }
+	catch(Exception e){
+            System.out.println(e);
+        }
+    }
+}
+
+
+34. Create and Use Java Modules
+
+module-info.java
+module com.utils{
+    exports com.utils;
+}
+
+
+Utility.java:
+package com.utils;
+public class Utility{
+    public static void greet(){
+        System.out.println("Hello");
+    }
+}
+
+module-info.java:
+module com.greetings{
+    requires com.utils;
+}
+
+Main.java:
+import com.utils.Utility;
+public class Main{
+    public static void main(String[] args){
+        Utility.greet();
+    }
+}
+
+
+35. TCP Client-Server Chat
+
+Server:
+import java.net.*;
+import java.io.*;
+public class Server{
+    public static void main(String[] args) throws Exception{
+        ServerSocket ss=new ServerSocket(5000);
+        Socket s=ss.accept();
+        DataInputStream dis=new DataInputStream(s.getInputStream());
+        System.out.println(dis.readUTF());
+        ss.close();
+    }
+}
+
+Client:
+import java.net.*;
+import java.io.*;
+public class Client{
+    public static void main(String[] args) throws Exception{
+        Socket s=new Socket("localhost",5000);
+        DataOutputStream dos=new DataOutputStream(s.getOutputStream());
+        dos.writeUTF("Hello Server");
+        s.close();
+    }
+}
+
+
+36. HTTP Client API
+
+import java.net.http.*;
+import java.net.URI;
+public class HttpClientDemo{
+    public static void main(String[] args) throws Exception{
+
+        HttpClient client=HttpClient.newHttpClient();
+
+        HttpRequest request=HttpRequest.newBuilder().uri(
+	URI.create("https://api.github.com")).build();
+
+        HttpResponse<String> response=client.send(request,
+	HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.statusCode());
+        System.out.println(response.body());
+    }
+}
+
+
+37. Using javap to Inspect Bytecode
+
+Program:
+public class Demo{
+    public void display(){
+        System.out.println("Hello");
+    }
+}
+Compile: javac Demo.java
+Inspect: javap -c Demo
+
+
+38. Decompile a Class File
+
+Program:
+public class Demo{
+    public static void main(String[] args){
+        System.out.println("Hello");
+    }
+}
+Compile: javac Demo.java
+Open Demo.class using:JD-GUI or CFR
+
+
+39. Reflection in Java
+
+import java.lang.reflect.*;
+public class ReflectionDemo{
+    public static void main(String[] args) throws Exception{
+        Class<?> c=Class.forName("java.lang.String");
+        Method methods[]=c.getDeclaredMethods();
+        for(Method m:methods){
+            System.out.println(m.getName());
+        }
+    }
+}
+
+
+40. Virtual Threads (Java 21)
+
+public class VirtualThreadDemo{
+    public static void main(String[] args){
+        for(int i=1;i<=1000;i++){
+            Thread.startVirtualThread(()->System.out.println("Virtual Thread"));
+        }
+    }
+}
+
+
+41. Executor Service and Callable
+
+import java.util.concurrent.*;
+public class ExecutorDemo{
+    public static void main(String[] args) throws Exception{
+        ExecutorService ex=Executors.newFixedThreadPool(2);
+        Callable<Integer> c1= ()->10+20;
+        Future<Integer> result=ex.submit(c1);
+        System.out.println(result.get());
+        ex.shutdown();
+    }
+}

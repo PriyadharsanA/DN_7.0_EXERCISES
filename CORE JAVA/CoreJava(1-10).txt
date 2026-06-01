@@ -1,0 +1,160 @@
+CORE JAVA (Programs 1–10)
+
+1. Hello World Program
+
+public class HelloWorld{
+    public static void main(String[] args){
+        System.out.println("Hello, World!");
+    }
+}
+
+
+2. Simple Calculator
+
+import java.util.Scanner;
+public class Calculator{
+    public static void main(String[] args){
+        Scanner in=new Scanner(System.in);
+        System.out.print("Enter first number: ");
+        double a=in.nextDouble();
+        System.out.print("Enter second number: ");
+        double b=in.nextDouble();
+        System.out.print("Enter operator (+,-,*,/) : ");
+        char op=in.next().charAt(0);
+        switch(op){
+            case '+': System.out.println(a+b); break;
+            case '-': System.out.println(a-b); break;
+            case '*': System.out.println(a*b); break;
+            case '/': System.out.println(a/b); break;
+            default: System.out.println("Invalid Operator");
+        }
+    }
+}
+
+
+3. Even or Odd Checker
+
+import java.util.Scanner;
+public class EvenOdd{
+    public static void main(String[] args){
+        Scanner in=new Scanner(System.in);
+        int n=in.nextInt();
+        if(n%2==0)
+            System.out.println("Even");
+        else
+            System.out.println("Odd");
+    }
+}
+
+
+4. Leap Year Checker
+
+import java.util.Scanner;
+public class LeapYear{
+    public static void main(String[] args){
+        Scanner in=new Scanner(System.in);
+        int year=in.nextInt();
+        if((year%4==0 && year%100!=0) || year%400==0)
+            System.out.println("Leap Year");
+        else
+            System.out.println("Not Leap Year");
+    }
+}
+
+
+5. Multiplication Table
+
+import java.util.Scanner;
+public class MultiplicationTable{
+    public static void main(String[] args){
+        Scanner in=new Scanner(System.in);
+        int n=in.nextInt();
+        for(int i=1;i<=10;i++){
+            System.out.println(n+" x "+i+" = "+(n*i));
+        }
+    }
+}
+
+
+6. Data Type Demonstration
+
+public class DataTypes{
+    public static void main(String[] args){
+        int a=10;
+        float b=5.5f;
+        double c=12.34;
+        char d='A';
+        boolean e=true;
+        System.out.println(a);
+        System.out.println(b);
+        System.out.println(c);
+        System.out.println(d);
+        System.out.println(e);
+    }
+}
+
+
+7. Type Casting Example
+
+public class TypeCasting{
+    public static void main(String[] args){
+        double d=10.75;
+        int i=(int)d;
+        int x=20;
+        double y=x;
+        System.out.println(i);
+        System.out.println(y);
+    }
+}
+
+
+8. Operator Precedence
+
+public class OperatorPrecedence{
+    public static void main(String[] args){
+        int result=10+5*2;
+        System.out.println(result);
+    }
+}
+
+
+9. Grade Calculator
+
+import java.util.Scanner;
+public class GradeCalculator{
+    public static void main(String[] args){
+        Scanner in=new Scanner(System.in);
+        int marks=in.nextInt();
+        if(marks>=90)
+            System.out.println("A");
+        else if(marks>=80)
+            System.out.println("B");
+        else if(marks>=70)
+            System.out.println("C");
+        else if(marks>=60)
+            System.out.println("D");
+        else
+            System.out.println("F");
+    }
+}
+
+
+10. Number Guessing Game
+
+import java.util.*;
+public class GuessNumber{
+    public static void main(String[] args){
+        Scanner in=new Scanner(System.in);
+        int target=(int)(Math.random()*100)+1;
+        int guess;
+        do{
+            System.out.print("Guess: ");
+            guess=in.nextInt();
+            if(guess>target)
+                System.out.println("Too High");
+            else if(guess<target)
+                System.out.println("Too Low");
+        }while(guess!=target);
+        System.out.println("Correct!");
+    }
+}
