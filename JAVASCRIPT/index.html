@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Event Portal</title>
+</head>
+<body>
+    <div class="container">
+    <h1>Community Event Portal</h1>
+    <p>Welcome to the Local Community Event Portal</p>
+    <select id="category">
+        <option>Music</option>
+        <option>Tech</option>
+        <option>Sports</option>
+        <option>Workshop</option>
+    </select>
+    <input type="text" id="search" placeholder="Search Event">
+    <button id="registerBtn">Register</button>
+    <div id="events"></div>
+    <form id="regForm">
+    <input type="text" name="name" placeholder="Enter Name" required>
+    <input type="email" name="email" placeholder="Enter Email" required>
+    <button type="submit">Submit</button>
+    </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
